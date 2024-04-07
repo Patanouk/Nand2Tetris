@@ -9,3 +9,69 @@
 // the screen should be cleared.
 
 //// Replace this comment with your code.
+
+(INPUT)
+    // Listen to Keyboard Input
+    @KBD
+    D=M
+    @CLEAR
+    D;JEQ
+    @BLACKEN
+    D;JNE
+
+(BLACKEN)
+    // Do not redraw the screen if already black
+    @SCREEN
+    D=M
+    @INPUT
+    M;JLT
+    // Store 1 in R0 if should blacken screen
+    @R0
+    M=-1
+    @INITLOOP
+    0;JMP
+
+(CLEAR)
+    // Do not redraw the screen if already cleared
+    @SCREEN
+    D=M
+    @INPUT
+    M;JEQ
+    // Store 0 in R0 if should clear screen
+    @R0
+    M=0
+    @INITLOOP
+    0;JMP
+
+(INITLOOP)
+    // Number of screen rows. Used as a loop variable
+    @SCREEN
+    D=A
+    @8191
+    D=D+A
+    @screenRow
+    M=D
+    @LOOP
+    0;JMP
+
+(LOOP)
+    // Darken/clear pixels on current row
+    @R0
+    D=M
+    @screenRow
+    A=M
+    M=D
+
+    // Listen back to input if each row in screen has been drawn
+    @screenRow
+    D=M
+    @SCREEN
+    D=D-A
+    @INPUT
+    D;JEQ
+
+    // Else go to next row to draw
+    @screenRow
+    M=M-1
+    @LOOP
+    0;JMP
