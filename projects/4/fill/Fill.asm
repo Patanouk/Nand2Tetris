@@ -24,7 +24,7 @@
     @SCREEN
     D=M
     @INPUT
-    M;JLT
+    M-1;JEQ
     // Store 1 in R0 if should blacken screen
     @R0
     M=-1
