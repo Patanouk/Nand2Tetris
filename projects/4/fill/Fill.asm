@@ -24,9 +24,9 @@
     @SCREEN
     D=M
     @INPUT
-    M-1;JEQ
-    // Store 1 in R0 if should blacken screen
-    @R0
+    D-1;JEQ
+    // Store 1 in screenColor if should blacken screen
+    @screenColor
     M=-1
     @INITLOOP
     0;JMP
@@ -36,9 +36,9 @@
     @SCREEN
     D=M
     @INPUT
-    M;JEQ
-    // Store 0 in R0 if should clear screen
-    @R0
+    D;JEQ
+    // Store 0 in screenColor if should clear screen
+    @screenColor
     M=0
     @INITLOOP
     0;JMP
@@ -56,7 +56,7 @@
 
 (LOOP)
     // Darken/clear pixels on current row
-    @R0
+    @screenColor
     D=M
     @screenRow
     A=M
