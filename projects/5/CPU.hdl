@@ -32,5 +32,56 @@ CHIP CPU {
         pc[15];          // address of next instruction
 
     PARTS:
-	//// Replace this comment with your code.
+    Not(in=instruction[15], out=aInstruction);
+    Not(in=aInstruction, out=cInstruction);
+
+    And(a=cInstruction, b=instruction[3], out=writeM);
+    And(a=cInstruction, b=instruction[4], out=cInstructionAndLoadInDRegister);
+    And(a=cInstruction, b=instruction[5], out=cInstructionAndLoadInARegister);
+
+    // A register Input
+	Mux16(a=aluOutput, b=instruction, sel=aInstruction, out=aRegisterInput);
+
+	// A register
+	Or(a=aInstruction, b=cInstructionAndLoadInARegister, out=loadInARegister);
+	ARegister(in=aRegisterInput, load=loadInARegister, out=aRegisterOut, out[0..14]=addressM);
+
+    // D register (also ALU first input)
+    DRegister(in=aluOutput, load=cInstructionAndLoadInDRegister, out=dRegisterOut);
+
+    //ALU second input. Use the 'a' bit of the computation to check if should act on A or M
+    And(a=cInstruction, b=instruction[12], out=useMAsAluSecondInput);
+    Mux16(a=aRegisterOut, b=inM, sel=useMAsAluSecondInput, out=aluSecondInput);
+
+    //ALU
+    ALU(
+        x=dRegisterOut,
+        y=aluSecondInput,
+        zx=instruction[11],
+        nx=instruction[10],
+        zy=instruction[9],
+        ny=instruction[8],
+        f=instruction[7],
+        no=instruction[6],
+        out=aluOutput,
+        out=outM,
+        zr=zr,
+        ng=ng
+    );
+
+    //PC
+    Not(in=ng, out=positiveOrZero);
+    Xor(a=positiveOrZero, b=zr, out=strictlyPositive);
+
+    And(a=instruction[0], b=strictlyPositive, out=positiveAndJump);
+    And(a=instruction[1], b=zr, out=zeroAndJump);
+    And(a=instruction[2], b=ng, out=negativeAndJump);
+
+    Or(a=positiveAndJump, b=zeroAndJump, out=positiveOrZeroAndJump);
+    Or(a=positiveOrZeroAndJump, b=negativeAndJump, out=jumpIfCInstruction);
+
+    And(a=jumpIfCInstruction, b=cInstruction, out=jump);
+    Not(in=jump, out=increment);
+
+    PC(in=aRegisterOut, inc=increment, load=jump, reset=reset, out[0..14]=pc);
 }
