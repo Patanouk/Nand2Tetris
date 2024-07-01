@@ -24,9 +24,8 @@
     M=M+D
     @i
     M=M-1
-    D=M
     @LOOP
-    D;JNE
+    M;JNE
 
 (END)
     @END
