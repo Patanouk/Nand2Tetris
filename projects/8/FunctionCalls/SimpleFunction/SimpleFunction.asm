@@ -39,7 +39,7 @@ M=M+1
 A=M-1
 M=D
 
-@{0 + 5}
+@5
 D=A
 @SP
 D=A-D
@@ -54,13 +54,16 @@ M=D
 @Sys.init
 0;JMP
 
-(@RET_Sys.init_1)// File : test.vm
+(RET_Sys.init_1)
+
+// File : test.vm //
+
 // function SimpleFunction.test 2
 (SimpleFunction.test)
 @2
 D=A
 
-(@INIT_ARGS_SimpleFunction.test_0)
+(INIT_ARGS_SimpleFunction.test_0)
 @SP
 M=M+1
 A=M-1
