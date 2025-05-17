@@ -60,7 +60,7 @@ M=D
 
 // function Sys.init 0
 (Sys.init)
-@0
+@1
 D=A
 
 (INIT_ARGS_Sys.init_0)
@@ -141,7 +141,7 @@ M=D
 
 // function Main.fibonacci 0
 (Main.fibonacci)
-@0
+@1
 D=A
 
 (INIT_ARGS_Main.fibonacci_0)
