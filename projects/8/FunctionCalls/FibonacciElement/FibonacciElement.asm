@@ -60,17 +60,21 @@ M=D
 
 // function Sys.init 0
 (Sys.init)
-@1
+@0
 D=A
 
 (INIT_ARGS_Sys.init_0)
+@AFTER_INIT_ARGS_Sys.init_0
+D;JEQ
+
 @SP
 M=M+1
 A=M-1
 M=0
 D=D-1
 @INIT_ARGS_Sys.init_0
-D;JNE
+D;JMP
+(AFTER_INIT_ARGS_Sys.init_0)
 
 // push constant 4
 @4
@@ -141,17 +145,21 @@ M=D
 
 // function Main.fibonacci 0
 (Main.fibonacci)
-@1
+@0
 D=A
 
 (INIT_ARGS_Main.fibonacci_0)
+@AFTER_INIT_ARGS_Main.fibonacci_0
+D;JEQ
+
 @SP
 M=M+1
 A=M-1
 M=0
 D=D-1
 @INIT_ARGS_Main.fibonacci_0
-D;JNE
+D;JMP
+(AFTER_INIT_ARGS_Main.fibonacci_0)
 
 // push argument 0
 @0
