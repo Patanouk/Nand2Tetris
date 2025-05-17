@@ -1,10 +1,10 @@
 
 
-// File : test.vm //
+// File : SimpleFunction.vm //
 
 // function SimpleFunction.test 2
 (SimpleFunction.test)
-@2
+@3
 D=A
 
 (INIT_ARGS_SimpleFunction.test_0)
