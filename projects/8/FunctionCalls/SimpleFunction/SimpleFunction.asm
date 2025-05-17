@@ -1,60 +1,4 @@
-//INIT CODE
-@256
-D=A
-@SP
-M=D
 
-@RET_Sys.init_1
-D=A
-@SP
-M=M+1
-A=M-1
-M=D
-
-@LCL
-D=M
-@SP
-M=M+1
-A=M-1
-M=D
-
-@ARG
-D=M
-@SP
-M=M+1
-A=M-1
-M=D
-
-@THIS
-D=M
-@SP
-M=M+1
-A=M-1
-M=D
-
-@THAT
-D=M
-@SP
-M=M+1
-A=M-1
-M=D
-
-@5
-D=A
-@SP
-D=A-D
-@ARG
-M=D
-
-@SP
-D=A
-@LCL
-M=D
-
-@Sys.init
-0;JMP
-
-(RET_Sys.init_1)
 
 // File : test.vm //
 
@@ -137,7 +81,7 @@ M=M-D
 // return
 @LCL
 D=M
-@R0
+@R13
 M=D
 
 @5
