@@ -94,11 +94,13 @@ M=D
 AM=M-1
 D=M
 @ARG
+A=M
 M=D
-D=A
 
+@ARG
+D=M
 @SP
-M=D
+M=D+1
 
 @R13
 AM=M-1
