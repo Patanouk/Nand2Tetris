@@ -1,20 +1,80 @@
+//INIT CODE
+@256
+D=A
+@SP
+M=D
 
+@RET_Sys.init_1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
 
-// File : SimpleFunction.vm //
+@LCL
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+
+@ARG
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+
+@THIS
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+
+@THAT
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+
+@SP
+D=M
+@5
+D=D-A
+@ARG
+M=D
+
+@SP
+D=M
+@LCL
+M=D
+
+@Sys.init
+0;JMP
+
+(RET_Sys.init_1)
+
+// File : Sys.vm //
 
 // function SimpleFunction.test 2
 (SimpleFunction.test)
-@3
+@2
 D=A
 
 (INIT_ARGS_SimpleFunction.test_0)
+@AFTER_INIT_ARGS_SimpleFunction.test_0
+D;JEQ
+
 @SP
 M=M+1
 A=M-1
 M=0
 D=D-1
 @INIT_ARGS_SimpleFunction.test_0
-D;JNE
+D;JMP
+(AFTER_INIT_ARGS_SimpleFunction.test_0)
 
 // push local 0
 @0
@@ -103,25 +163,33 @@ D=M
 M=D+1
 
 @R13
-AM=M-1
+D=M
+@1
+A=D-A
 D=M
 @THAT
 M=D
 
 @R13
-AM=M-1
+D=M
+@2
+A=D-A
 D=M
 @THIS
 M=D
 
 @R13
-AM=M-1
+D=M
+@3
+A=D-A
 D=M
 @ARG
 M=D
 
 @R13
-AM=M-1
+D=M
+@4
+A=D-A
 D=M
 @LCL
 M=D
